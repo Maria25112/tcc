@@ -40,12 +40,12 @@ const UsuarioController = {
     }
 };
 
-function salvarReflexao(req, res){
-    const { nome, resposta } = req.body;
+function salvarAvaliacao(req, res){
+    const { musica, artista, comentario } = req.body;
 
-    if(!nome || !resposta){
+    if(!musica || !artista || !comentario){
         return res.status(400).json({
-            erro: "Nome e resposta são obrigatórios."
+            erro: "Musica, artista e comentario são obrigatórios."
         });
     }
 
@@ -101,7 +101,7 @@ function salvarResultado(req, res) {
     );
 }
 
-function listarResultados(req, res) {
+function salvarAvaliacao(req, res) {
     diversidadeModel.listarResultados((erro, resultados) => {
         if (erro) {
             return res.status(500).json({
@@ -128,11 +128,12 @@ function curtirReflexao(req, res){
 }
  
 module.exports = {
-    salvarReflexao,
+    salvarAvaliacao,
     listarReflexoes,
     salvarReflexao,
     listarReflexoes,
     curtirReflexao
 }
+
 
 module.exports = UsuarioController;

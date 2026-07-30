@@ -21,19 +21,21 @@ function salvarAvaliacao(musica, artista, comentario, callback) {
  
   conexao.query(sql, [musica, artista, comentario], callback);
 }
- 
+
+
 // Listar avaliacoes(oq e o id)
 function listarAvaliacoes(callback) {
   const sql = `
     SELECT id, musica, artista, comentario, curtidas
     FROM avaliacoes
+    ORDER BY data_avaliacao DESC
   `;
  
   conexao.query(sql, callback);
 }
 
  
-function curtirAcaliacao(id, callback) {
+function curtirAvaliacao(id, callback) {
   const sql = `
     UPDATE avaliacoes
     SET curtidas = curtidas + 1
@@ -48,5 +50,7 @@ module.exports = {
   listarAvaliacoes,
   salvarAvaliacao,
   listarAvaliacoes,
-  curtirAcaliacao
+  curtirAvaliacao,
 };
+
+module.exports = usuarioModel
