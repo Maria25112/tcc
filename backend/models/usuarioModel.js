@@ -10,6 +10,43 @@ const usuarioModel = {
         const sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?"
         conexao.query(sql, [email, senha], callback);
     }
-};
+}; 
+ 
+// salvar avaliacao
+function salvarAvaliacao(musica, artista, comentario, callback) {
+  const sql = `
+    INSERT INTO avalicoes (musica, artista, comentario)
+    VALUES (?, ?, ?)
+  `;
+ 
+  conexao.query(sql, [musica, artista, comentario], callback);
+}
+ 
+// Listar avaliacoes(oq e o id)
+function listarAvaliacoes(callback) {
+  const sql = `
+    SELECT id, musica, artista, comentario, curtidas
+    FROM avaliacoes
+  `;
+ 
+  conexao.query(sql, callback);
+}
 
-module.exports = usuarioModel;
+ 
+function curtirAcaliacao(id, callback) {
+  const sql = `
+    UPDATE avaliacoes
+    SET curtidas = curtidas + 1
+    WHERE id = ?
+  `;
+ 
+  conexao.query(sql, [id], callback);
+}
+ 
+module.exports = {
+  salvarAvaliacao,
+  listarAvaliacoes,
+  salvarAvaliacao,
+  listarAvaliacoes,
+  curtirAcaliacao
+};

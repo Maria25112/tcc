@@ -39,5 +39,100 @@ const UsuarioController = {
         });
     }
 };
+
+function salvarReflexao(req, res){
+    const { nome, resposta } = req.body;
+
+    if(!nome || !resposta){
+        return res.status(400).json({
+            erro: "Nome e resposta são obrigatórios."
+        });
+    }
+
+    diversidadeModel.salvarReflexao(nome, resposta, (erro, resultado) => {
+        if (erro) {
+            return res.status(500).json({
+                erro: "Erro ao salvar reflexão."
+            });
+        }
+
+        res.status(201).json({
+            mensagem: "Reflexão salva com sucesso",
+            id: resultado.insertId
+        });
+    });
+}
+
+function listarReflexoes(req, res){
+    diversidadeModel.listarReflexoes((erro, resultados) => {
+        if (erro) {
+            return res.status(500).json({
+                erro: "Erro a listar reflexões."
+            });
+        }
+        res.json(resultados);
+    })
+}
+
+function salvarResultado(req, res) {
+    const { nome, pontuacao, total_perguntas } = req.body;
+
+    if (!nome || pontuacao == undefined || total_perguntas === undefined) {
+        return res.status(400).json({
+            erro: "Nome, pontuação e total de perguntas são obrigatorias."
+        });
+    }
+
+    diversidadeModel.salvarResultado(
+        nome,
+        pontuacao,
+        total_perguntas,
+        (erro, resultado) => {
+            if (erro) {
+                return res.status(500).json({
+                    erro: "Erro ao salvar resultado."
+                });
+            }
+        res.status(201).json({
+            mensagem: "Resultado salvo com sucesso!",
+            id: resultado.insertId
+            });
+        }
+    );
+}
+
+function listarResultados(req, res) {
+    diversidadeModel.listarResultados((erro, resultados) => {
+        if (erro) {
+            return res.status(500).json({
+                erro: "Erro ao listar resultados."
+            });
+        }
+        res.json(resultados);
+    });
+}
+
+function curtirReflexao(req, res){
+    const { id } = req.params;
  
+    diversidadeModel.curtirReflexao(id, (erro) => {
+        if (erro) {
+            return res.status(500).json({
+                erro: "Erro ao curtir reflexão."
+            });
+        }
+        res.json({
+            mensagem: "Reflexão curtida com sucesso!"
+         });
+    });
+}
+ 
+module.exports = {
+    salvarReflexao,
+    listarReflexoes,
+    salvarReflexao,
+    listarReflexoes,
+    curtirReflexao
+}
+
 module.exports = UsuarioController;
