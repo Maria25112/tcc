@@ -1,89 +1,52 @@
 const API = "http://localhost:3000";
  
-const nomeInput = document.getElementById("nome");
-const respostaInput = document.getElementById("resposta");
+const musicaInput = document.getElementById("musica");
+const artistaInput = document.getElementById("artista");
+const comentarioInput = document.getElementById("comentario ");
 const btnEnviar = document.getElementById("btn-enviar");
 const mensagem = document.getElementById("mensagem");
 const avaliacoesContainer = document.getElementById("home-container");
  
-// LISTAR REFLEXÕES
+// LISTAR AVALIAÇÕES
 async function carregarAvaliacoes() {
   try {
-    const resposta = await fetch(`${API}/reflexoes`);
-    const reflexoes = await resposta.json();
+    const resposta = await fetch(`${API}/avaliacoes`);
+    const avaliacoes = await resposta.json();
  
     avaliacoesContainer.innerHTML = "";
  
-    reflexoes.forEach((reflexao) => {
-      reflexoesContainer.innerHTML += `
-        <div class="card-reflexao">
+    avaliacoes.forEach((avaliacao) => {
+      avaliacoesContainer.innerHTML += `
+        <div class="card-avaliacao">
           <div>
-            <h3>${reflexao.nome}</h3>
-            <p>${reflexao.resposta}</p>
+            <h3>${avaliacao.musica}</h3>
+            <h3>${avaliacao.artistaInput}</h3>
+            <p>${avaliacao.resposta}</p>
           </div>
  
-          <button class="btn btn-curtir" onclick="curtirReflexao(${reflexao.id})">
-            ❤️ Curtir <span>${reflexao.curtidas || 0}</span>
+          <button class="btn btn-curtir" onclick="curtirAvaliacao(${avaliacao.id})">
+            ❤️ Curtir <span>${avaliacao.curtidas || 0}</span>
           </button>
         </div>
       `;
     });
   } catch (erro) {
-    console.log("Erro ao carregar reflexões:", erro);
+    console.log("Erro ao carregar avaliações:", erro);
   }
 }
  
-// SALVAR REFLEXÃO
-btnEnviar.addEventListener("click", async () => {
-  const nome = nomeInput.value.trim();
-  const resposta = respostaInput.value.trim();
- 
-  if (!nome || !resposta) {
-    mensagem.innerText = "Preencha todos os campos.";
-    mensagem.style.color = "red";
-    return;
-  }
- 
-  try {
-    const envio = await fetch(`${API}/reflexoes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nome,
-        resposta
-      })
-    });
- 
-    const dados = await envio.json();
- 
-    mensagem.innerText = dados.mensagem;
-    mensagem.style.color = "green";
- 
-    nomeInput.value = "";
-    respostaInput.value = "";
- 
-    carregarReflexoes();
-  } catch (erro) {
-    mensagem.innerText = "Erro ao enviar reflexão.";
-    mensagem.style.color = "red";
-    console.log("Erro ao enviar reflexão:", erro);
-  }
-});
- 
 // CURTIR REFLEXÃO
-async function curtirReflexao(id) {
+async function curtirAvaliacao(id) {
   try {
-    await fetch(`${API}/reflexoes/${id}/curtir`, {
+    await fetch(`${API}/avaliacoes/${id}/curtir`, {
       method: "PUT"
     });
  
     carregarReflexoes();
   } catch (erro) {
-    console.log("Erro ao curtir reflexão:", erro);
+    console.log("Erro ao curtir avaliação:", erro);
   }
 }
  
-carregarReflexoes();
+carregarAvaliacoes();
  

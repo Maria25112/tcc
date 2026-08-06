@@ -1,0 +1,13 @@
+:root {
+    --bg-color: #f4f4f9;
+    --text-color: #333333;
+    --card-bg: #ffffff;
+    --primary-color: #007bff;
+}
+
+.dark-theme {
+    --bg-color: #1a1a2e;
+    --text-color: #e6e6e6;
+    --card-bg: #16213e;
+    --primary-color: #e94560;
+}

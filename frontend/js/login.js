@@ -1,5 +1,5 @@
-const formlogin = document.getElementById("formLogin");
-const formcadastro = document.getElementById("mensagemLogin");
+const formLogin = document.getElementById("formLogin");
+const formCadastro = document.getElementById("formCadastro");
 
 formCadastro.addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -18,13 +18,16 @@ formCadastro.addEventListener("submit", async function(event) {
     const resultado = await resposta.json();
 
     document.getElementById(mensagemCadastro).innerText = resultado.mensagem;
+    if (resposta.ok) {
+        formCadastro.reset();
+    }
 });
 
 formlogin.addEventListener("submit", async function(event){
     event.preventDefault();
 
     const email = document.getElementById("emailLogin").value;
-    const senha = document.getElementById("senhalLogin").value;
+    const senha = document.getElementById("senhaLogin").value;
 
     const resposta = await fetch("http://localhost:3000/usuarios/login",{
         method: "POST",
@@ -47,3 +50,5 @@ formlogin.addEventListener("submit", async function(event){
         mensagemLogin.style.color = "red";
     }
 });
+
+
