@@ -1,28 +1,36 @@
 const usuarioModel = require("../models/usuarioModel");
 
 const UsuarioController = {
+
+    // Cadastrar novo usuário
     cadastrar: (req, res) => {
         const { nome, email, senha } = req.body;
 
         if (!nome || !email || !senha) {
-            return res.json({ sucesso: false, mensagem: "Preencha todos os campos!" });
+            return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos!" });
         }
 
         usuarioModel.cadastrar(nome, email, senha, (erro) => {
             if (erro) {
-                console.error("Erro detalhado no banco:", erro);
-                return res.json({ sucesso: false, mensagem: "Erro ao cadastrar usuario", detalhe: erro.message });
+                console.error("Erro ao cadastrar usuário:", erro);
+                return res.status(500).json({ sucesso: false, mensagem: "Erro ao cadastrar usuário.", detalhe: erro.message });
             }
-            res.json({ sucesso: true, mensagem: "Usuário cadastrado com sucesso!" });
+            res.status(201).json({ sucesso: true, mensagem: "Usuário cadastrado com sucesso!" });
         });
     },
 
+    // Login de usuário
     login: (req, res) => {
         const { email, senha } = req.body;
 
+        if (!email || !senha) {
+            return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos!" });
+        }
+
         usuarioModel.login(email, senha, (erro, resultado) => {
             if (erro) {
-                return res.json({ sucesso: false, mensagem: "Erro no servidor!" });
+                console.error("Erro no login:", erro);
+                return res.status(500).json({ sucesso: false, mensagem: "Erro no servidor!" });
             }
 
             if (resultado && resultado.length > 0) {
@@ -32,62 +40,42 @@ const UsuarioController = {
                     usuario: resultado[0]
                 });
             } else {
-                res.json({
+                res.status(401).json({
                     sucesso: false,
-                    mensagem: "Email ou senha incorretos"
+                    mensagem: "Email ou senha incorretos."
                 });
             }
         });
     },
 
-    salvarAvaliacao: (req, res) => {
-        const { musica, artista, comentario } = req.body;
+    // Salvar avaliação de música
+    avaliar: (req, res) => {
+        const { musica, artista, comentario, nota } = req.body;
 
-        if (!musica || !artista || !comentario) {
-            return res.status(400).json({
-                erro: "Musica, artista e comentario são obrigatórios."
-            });
+        if (!musica || !artista || !comentario || !nota) {
+            return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos!" });
         }
 
-        usuarioModel.salvarAvaliacao(musica, artista, comentario, (erro, resultado) => {
+        usuarioModel.avaliar(musica, artista, comentario, nota, (erro) => {
             if (erro) {
-                return res.status(500).json({
-                    erro: "Erro ao salvar avaliação."
-                });
+                console.error("Erro ao salvar avaliação:", erro);
+                return res.status(500).json({ sucesso: false, mensagem: "Erro ao salvar avaliação.", detalhe: erro.message });
             }
-
-            res.status(201).json({
-                mensagem: "Avaliação salva com sucesso",
-                id: resultado.insertId
-            });
+            res.status(201).json({ sucesso: true, mensagem: "Avaliação salva com sucesso!" });
         });
     },
 
+    // Listar avaliações
     listarAvaliacoes: (req, res) => {
         usuarioModel.listarAvaliacoes((erro, resultados) => {
             if (erro) {
-                return res.status(500).json({
-                    erro: "Erro a listar avaliações."
-                });
+                console.error("Erro ao listar avaliações:", erro);
+                return res.status(500).json({ sucesso: false, mensagem: "Erro ao listar avaliações." });
             }
-            res.json(resultados);
-        });
-    },
-
-    curtirAvaliacao: (req, res) => {
-        const { id } = req.params;
-
-        usuarioModel.curtirAvaliacao(id, (erro) => {
-            if (erro) {
-                return res.status(500).json({
-                    erro: "Erro ao curtir avaliação."
-                });
-            }
-            res.json({
-                mensagem: "Avaliação curtida com sucesso!"
-            });
+            res.json({ sucesso: true, avaliacoes: resultados });
         });
     }
+
 };
 
 module.exports = UsuarioController;

@@ -1,13 +1,179 @@
 :root {
-    --bg-color: #f4f4f9;
-    --text-color: #333333;
-    --card-bg: #ffffff;
-    --primary-color: #007bff;
-}
-
-.dark-theme {
     --bg-color: #1a1a2e;
     --text-color: #e6e6e6;
     --card-bg: #16213e;
     --primary-color: #e94560;
+    --border-color: #2a2a4a;
+    --transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+body {
+    background-color: #0b0813; /* Fundo escuro do app */
+    font-family: sans-serif;
+  }
+  
+  .cabecalho {
+    display: flex;
+    justify-content: center; /* Mantém o menu no centro */
+    align-items: center;     /* Alinha verticalmente o logo e o menu */
+    padding: 20px;
+    background-color: #0d0a1b;
+    position: relative;      /* Necessário para o posicionamento do logo */
+  }
+  
+  .cabecalho-menu {
+    display: flex;
+    gap: 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #8b88a0;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease; /* Transição suave para cores e brilho */
+    border: 1px solid transparent; /* Evita que o layout pule ao aplicar borda */
+  }
+
+  .nav-logo {
+    position: absolute;      /* Remove o logo do fluxo central do flexbox */
+    left: 20px;              /* Alinha o logo na extremidade esquerda */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #8b88a0;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: all 0.2s ease;
+  }
+
+  .nav-item:hover {
+    background-color: rgba(59, 32, 115, 0.4); /* Roxo mais suave ao passar o mouse */
+    color: #ffffff;
+    border: 1px solid #5c35b4;
+    box-shadow: 0 0 10px rgba(92, 53, 180, 0.5); /* Brilho sutil */
+  }
+  
+
+
+
+/* Tema escuro — aplicado apenas na página de avaliações */
+/* body.dark-theme {
+    --bg-color: #1a1a2e;
+    --text-color: #e6e6e6;
+    --card-bg: #16213e;
+    --primary-color: #e94560;
+    --border-color: #2a2a4a;
+} */
+
+/* ===== APLICAÇÃO DAS VARIÁVEIS ===== */
+
+/* Transição suave ao trocar tema */
+/* *, *::before, *::after {
+    transition: var(--transition);
+}
+
+/* Fundo e texto geral da página */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cabeçalho / header */
+header, .cabecalho {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 24px;
+}
+
+/* Links de navegação */
+nav a {
+    color: var(--primary-color);
+}
+
+/* Cards de avaliação */
+.card-avaliacao {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+/* Formulários */
+input, textarea, select {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Botões */
+button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+/* Botão de tema */
+#btn-tema {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    padding: 6px 12px;
+} */
+
+/* ===== ESTRELAS INTERATIVAS ===== */
+.estrelas-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 4px;
+    margin: 8px 0;
+}
+
+.estrelas-container input[type="radio"] {
+    display: none;
+}
+
+.estrelas-container label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.15s ease, transform 0.1s ease;
+}
+
+/* Estrela selecionada e todas as anteriores (flex-direction: row-reverse faz a mágica) */
+.estrelas-container input[type="radio"]:checked ~ label,
+.estrelas-container label:hover,
+.estrelas-container label:hover ~ label {
+    color: #f5a623;
+    transform: scale(1.15);
+}
+

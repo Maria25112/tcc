@@ -1,52 +1,40 @@
 const API = "http://localhost:3000";
- 
-const musicaInput = document.getElementById("musica");
-const artistaInput = document.getElementById("artista");
-const comentarioInput = document.getElementById("comentario ");
-const btnEnviar = document.getElementById("btn-enviar");
-const mensagem = document.getElementById("mensagem");
+
 const avaliacoesContainer = document.getElementById("home-container");
- 
+
+// Gera as estrelas com base na nota
+function gerarEstrelas(nota) {
+    return "⭐".repeat(nota) + "☆".repeat(5 - nota);
+}
+
 // LISTAR AVALIAÇÕES
 async function carregarAvaliacoes() {
-  try {
-    const resposta = await fetch(`${API}/avaliacoes`);
-    const avaliacoes = await resposta.json();
- 
-    avaliacoesContainer.innerHTML = "";
- 
-    avaliacoes.forEach((avaliacao) => {
-      avaliacoesContainer.innerHTML += `
-        <div class="card-avaliacao">
-          <div>
-            <h3>${avaliacao.musica}</h3>
-            <h3>${avaliacao.artistaInput}</h3>
-            <p>${avaliacao.resposta}</p>
-          </div>
- 
-          <button class="btn btn-curtir" onclick="curtirAvaliacao(${avaliacao.id})">
-            ❤️ Curtir <span>${avaliacao.curtidas || 0}</span>
-          </button>
-        </div>
-      `;
-    });
-  } catch (erro) {
-    console.log("Erro ao carregar avaliações:", erro);
-  }
+    try {
+        const resposta = await fetch(`${API}/usuarios/avaliacoes`);
+        const dados = await resposta.json();
+
+        avaliacoesContainer.innerHTML = "";
+
+        if (!dados.sucesso || dados.avaliacoes.length === 0) {
+            avaliacoesContainer.innerHTML = "<p>Nenhuma avaliação encontrada ainda.</p>";
+            return;
+        }
+
+        dados.avaliacoes.forEach((avaliacao) => {
+            avaliacoesContainer.innerHTML += `
+                <div class="card-avaliacao">
+                    <h3>${avaliacao.musica}</h3>
+                    <p><strong>Artista:</strong> ${avaliacao.artista}</p>
+                    <p>${avaliacao.comentario}</p>
+                    <p>${gerarEstrelas(avaliacao.nota)}</p>
+                </div>
+            `;
+        });
+
+    } catch (erro) {
+        console.error("Erro ao carregar avaliações:", erro);
+        avaliacoesContainer.innerHTML = "<p>Erro ao carregar avaliações. Verifique se o servidor está rodando.</p>";
+    }
 }
- 
-// CURTIR REFLEXÃO
-async function curtirAvaliacao(id) {
-  try {
-    await fetch(`${API}/avaliacoes/${id}/curtir`, {
-      method: "PUT"
-    });
- 
-    carregarReflexoes();
-  } catch (erro) {
-    console.log("Erro ao curtir avaliação:", erro);
-  }
-}
- 
-carregarAvaliacoes();
- 
+
+carregarAvaliacoes()

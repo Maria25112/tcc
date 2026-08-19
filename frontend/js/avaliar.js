@@ -1,52 +1,60 @@
-const bntCor = document.getElementById('btn-tema');
+const formAvaliacao = document.getElementById("formAvaliacao");
+const bntCor = document.getElementById("btn-tema");
 
-btnEnviar.addEventListener("click", async () => {
-    const musica = musicaInput.value.trim();
-    const artista = artistaInput.value.trim();
-    const comentario = comentarioInput.value.trim();
-   
-    if (!musica || !artista || !comentario) {
-      mensagem.innerText = "Preencha todos os campos.";
-      mensagem.style.color = "red";
-      return;
+// Envio do formulário de avaliação
+formAvaliacao.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const musica = document.getElementById("musicaAvaliacao").value.trim();
+    const artista = document.getElementById("artistaAvaliacao").value.trim();
+    const comentario = document.getElementById("comentarioAvaliacao").value.trim();
+    const notaSelecionada = document.querySelector('input[name="nota"]:checked');
+    const nota = notaSelecionada ? notaSelecionada.value : null;
+
+    const mensagemAvaliacao = document.getElementById("mensagemAvaliacao");
+
+    if (!musica || !artista || !comentario || !nota) {
+        mensagemAvaliacao.innerText = !nota
+            ? "Clique em uma estrela para dar sua nota!"
+            : "Preencha todos os campos!";
+        mensagemAvaliacao.style.color = "red";
+        return;
     }
-   
+
     try {
-      const envio = await fetch(`${API}/avaliacoes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          musica,
-          artista,
-          comentario
-        })
-      });
-   
-      const dados = await envio.json();
-   
-      mensagem.innerText = dados.mensagem;
-      mensagem.style.color = "green";
-   
-      musicaInput.value = "";
-      artistaInput.value = "";
-      comentarioInput.value = "";
-   
-      carregarAvaliacoes();
+        const resposta = await fetch("http://localhost:3000/usuarios/avaliacoes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ musica, artista, comentario, nota })
+        });
+
+        const resultado = await resposta.json();
+
+        mensagemAvaliacao.innerText = resultado.mensagem;
+
+        if (resultado.sucesso) {
+            mensagemAvaliacao.style.color = "green";
+            formAvaliacao.reset();
+        } else {
+            mensagemAvaliacao.style.color = "red";
+        }
+
     } catch (erro) {
-      mensagem.innerText = "Erro ao enviar avaliação.";
-      mensagem.style.color = "red";
-      console.log("Erro ao enviar avaliação:", erro);
+        console.error("Erro ao enviar avaliação:", erro);
+        mensagemAvaliacao.innerText = "Erro de conexão com o servidor.";
+        mensagemAvaliacao.style.color = "red";
     }
-  });
+});
 
-  bntCor.addEventListener('click', function() {
-    document.body.classList.toggle('dark-theme')
+// Alternância de tema claro/escuro (apenas na página de avaliações)
+bntCor.addEventListener("click", function () {
+    document.body.classList.toggle("dark-theme");
 
-    if (document.body.classList.contains('dark-theme')) {
-        bntCor.innerText = '☀️Claro';
-    }else{
-        bntCor.innerText = '🌙Escuro';
+    if (document.body.classList.contains("dark-theme")) {
+        bntCor.innerText = "☀️ Claro";
+    } else {
+        bntCor.innerText = "🌙 Escuro";
     }
 });

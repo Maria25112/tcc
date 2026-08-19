@@ -2,15 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const usuarioController = require("../controllers/usuarioController");
-const usuarioModel = require("../models/usuarioModel");
-const UsuarioController = require("../controllers/usuarioController");
 
+// Rotas de usuário
 router.post("/cadastro", usuarioController.cadastrar);
 router.post("/login", usuarioController.login);
 
-//rotas da página de reflexões
-router.post("/avaliacoes", UsuarioController.salvarAvaliacao);
+// Rotas de avaliações
+router.post("/avaliacoes", usuarioController.avaliar);
 router.get("/avaliacoes", usuarioController.listarAvaliacoes);
-router.put("/avaliacoes/:id/curtir", usuarioController.curtirAvaliacao);
 
-module.exports = router; 
+module.exports = router;
