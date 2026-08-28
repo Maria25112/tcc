@@ -62,25 +62,6 @@ body {
     border: 1px solid #5c35b4;
     box-shadow: 0 0 10px rgba(92, 53, 180, 0.5); /* Brilho sutil */
   }
-  
-
-
-
-/* Tema escuro — aplicado apenas na página de avaliações */
-/* body.dark-theme {
-    --bg-color: #1a1a2e;
-    --text-color: #e6e6e6;
-    --card-bg: #16213e;
-    --primary-color: #e94560;
-    --border-color: #2a2a4a;
-} */
-
-/* ===== APLICAÇÃO DAS VARIÁVEIS ===== */
-
-/* Transição suave ao trocar tema */
-/* *, *::before, *::after {
-    transition: var(--transition);
-}
 
 /* Fundo e texto geral da página */
 body {
