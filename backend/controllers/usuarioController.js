@@ -50,13 +50,13 @@ const UsuarioController = {
 
     // Salvar avaliação de música
     avaliar: (req, res) => {
-        const { musica, artista, comentario, nota } = req.body;
+        const { musica, artista, comentario, nota, data_avaliacao } = req.body;
 
-        if (!musica || !artista || !comentario || !nota) {
+        if (!musica || !artista || !comentario || !nota || !data_avaliacao) {
             return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos!" });
         }
 
-        usuarioModel.avaliar(musica, artista, comentario, nota, (erro) => {
+        usuarioModel.avaliar(musica, artista, comentario, nota, data_avaliacao, (erro) => {
             if (erro) {
                 console.error("Erro ao salvar avaliação:", erro);
                 return res.status(500).json({ sucesso: false, mensagem: "Erro ao salvar avaliação.", detalhe: erro.message });
