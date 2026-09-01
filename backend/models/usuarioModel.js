@@ -16,9 +16,11 @@ const usuarioModel = {
 
     // Salvar avaliação de música
     avaliar: (musica, artista, comentario, nota, callback) => {
-        const sql = "INSERT INTO avaliacoes (musica, artista, comentario, nota, data_avaliacao) VALUES (?, ?, ?, ?, ?)";
-        conexao.query(sql, [musica, artista, comentario, nota, data_avaliacao], callback);
+        // Removida a coluna data_avaliacao do INSERT, o SQL cuidará disso sozinho
+        const sql = "INSERT INTO avaliacoes (musica, artista, comentario, nota) VALUES (?, ?, ?, ?)";
+        conexao.query(sql, [musica, artista, comentario, nota], callback);
     },
+
 
     // Listar todas as avaliações
     listarAvaliacoes: (callback) => {

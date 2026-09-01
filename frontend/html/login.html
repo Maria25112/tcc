@@ -1,44 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login e Cadastro</title>
+    <title>Entre Notas - Login e Cadastro</title>
     <link rel="stylesheet" href="../style.css">
     <style>
-        #caixaCadastro{
+        /* Mantém o controle estrutural de troca de telas */
+        #caixaCadastro {
             display: none;
         }
     </style>
 </head> 
 <body>
-    <!-- CAIXA DE LOGIN -->
-<div id="caixaLogin">
-    <h2>M . L . A</h2>
-    <h1>Login</h1>
-        <form id="formLogin">
-            <input type="email" id="emailLogin" placeholder="Email" required>
-            <input type="password" id="senhaLogin" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
-        </form>
-    <p id="mensagemLogin"></p>
-    <p>Não tem uma conta? <a href="#" id="linkIrCadastro">Cadastre-se aqui</a></p>
+    <!-- Container principal que centraliza as caixas na tela -->
+    <div class="autenticacao-container">
+        
+        <!-- CAIXA DE LOGIN -->
+        <div id="caixaLogin" class="autenticacao-card">
+            <h2 class="autenticacao-logo">Entre Notas</h2>
+            <h1>Login</h1>
+            <form id="formLogin">
+                <input type="email" id="emailLogin" placeholder="Email" required>
+                <input type="password" id="senhaLogin" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <p id="mensagemLogin" class="mensagem-alerta"></p>
+            <p class="autenticacao-alternativa">
+                Não tem uma conta? <a href="#" id="linkIrCadastro">Cadastre-se aqui</a>
+            </p>
+        </div>
+     
+        <!-- CAIXA DE CADASTRO -->
+        <div id="caixaCadastro" class="autenticacao-card">
+            <h2 class="autenticacao-logo">Entre Notas</h2>
+            <h1>Cadastrar novo usuário</h1>
+            <form id="formCadastro">
+                <input type="text" id="nomeCadastro" placeholder="Nome" required>
+                <input type="email" id="emailCadastro" placeholder="Email" required>
+                <input type="password" id="senhaCadastro" placeholder="Senha" required>
+                <button type="submit">Cadastrar</button>
+            </form>
+            <p id="mensagemCadastro" class="mensagem-alerta"></p>
+            <a href="#" id="linkIrLogin" class="autenticacao-alternativa link-voltar">Clique aqui para fazer login</a>
+        </div>
+
     </div>
- 
-    <div id="caixaCadastro">
-        <h2>M . L . A</h2>
-        <h1>Cadastrar novo usuário</h1>
-        <form id="formCadastro">
-            <input type="text" id="nomeCadastro" placeholder="Nome" required>
-            <input type="email" id="emailCadastro" placeholder="Email" required>
-            <input type="password" id="senhaCadastro" placeholder="Senha" required>
-            <button type="submit">Cadastrar</button>
-        </form>
-        <p id="mensagemCadastro"></p>
- 
-        <a href="#" id="linkIrLogin">Clique aqui para fazer login</a>
-    </div>
+
     <script src="../js/login.js"></script>
 </body>
 </html>
- 

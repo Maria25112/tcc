@@ -48,15 +48,16 @@ const UsuarioController = {
         });
     },
 
-    // Salvar avaliação de música
+    // Salvar avaliação de música (Sem precisar enviar a data manualmente)
     avaliar: (req, res) => {
-        const { musica, artista, comentario, nota, data_avaliacao } = req.body;
+        const { musica, artista, comentario, nota } = req.body; // Removido data_avaliacao daqui
 
-        if (!musica || !artista || !comentario || !nota || !data_avaliacao) {
+        if (!musica || !artista || !comentario || !nota) {
             return res.status(400).json({ sucesso: false, mensagem: "Preencha todos os campos!" });
         }
 
-        usuarioModel.avaliar(musica, artista, comentario, nota, data_avaliacao, (erro) => {
+        // Removido o argumento data_avaliacao da chamada do model
+        usuarioModel.avaliar(musica, artista, comentario, nota, (erro) => {
             if (erro) {
                 console.error("Erro ao salvar avaliação:", erro);
                 return res.status(500).json({ sucesso: false, mensagem: "Erro ao salvar avaliação.", detalhe: erro.message });
@@ -65,14 +66,31 @@ const UsuarioController = {
         });
     },
 
-    // Listar avaliações
+    // Listar avaliações (Formatando a data antes de enviar para o site)
     listarAvaliacoes: (req, res) => {
         usuarioModel.listarAvaliacoes((erro, resultados) => {
             if (erro) {
                 console.error("Erro ao listar avaliações:", erro);
                 return res.status(500).json({ sucesso: false, mensagem: "Erro ao listar avaliações." });
             }
-            res.json({ sucesso: true, avaliacoes: resultados });
+
+            // Formata a data de cada item retornado do banco
+            const avaliacoesFormatadas = resultados.map(item => {
+                return {
+                    ...item,
+                    // Converte o TIMESTAMP do banco em uma data PT-BR (DD/MM/AAAA DD:MM:SS)
+                    data_avaliacao: new Date(item.data_avaliacao).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })
+                };
+            });
+
+            // Envia os dados já formatados para o Front-end
+            res.json({ sucesso: true, avaliacoes: avaliacoesFormatadas });
         });
     }
 

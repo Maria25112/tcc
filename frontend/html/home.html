@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feed</title>
   <link rel="stylesheet" href="../style.css">
-
 </head>
 <body>
   <header class="cabecalho">
-    <a href="home.html" class="nav-logo"> M . L . A</a>
+    <a href="home.html" class="nav-logo"> Entre Notas</a>
     <a href="sobre.html" class="nav-sobre"> Sobre </a>
     <nav class="cabecalho-menu">
       <a href="home.html" class="nav-item">
@@ -27,20 +26,15 @@
     </nav>
   </header>
   
+  <section>
+    <h2 class="text-center mb-4 fw-bold">
+      Avaliações compartilhadas
+    </h2>
+    
+    <!-- Onde o JavaScript vai injetar os cards com as avaliações e as datas -->
+    <div id="home-container" class="row g-3"></div>
+  </section>
 
-    <section>
- 
-      <h2 class="text-center mb-4 fw-bold">
-        Avaliações compartilhadas
-      </h2>
-      
-      <div id="home-container" class="row g-3"></div>
-
- 
-    </section>
-
-    <script src="../js/home.js"></script>
-
-
-  </body>
-  </html>
+  <script src="../js/home.js"></script>
+</body>
+</html>

@@ -1,160 +1,236 @@
 :root {
-    --bg-color: #1a1a2e;
-    --text-color: #e6e6e6;
-    --card-bg: #16213e;
-    --primary-color: #e94560;
-    --border-color: #2a2a4a;
-    --transition: background-color 0.3s ease, color 0.3s ease;
+  --bg-color: #1a1a2e;
+  --text-color: #e6e6e6;
+  --card-bg: #16213e;
+  --primary-color: #e94560;
+  --border-color: #2a2a4a;
+  --transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 body {
-    background-color: #0b0813; /* Fundo escuro do app */
-    font-family: sans-serif;
-  }
-  
-  .cabecalho {
-    display: flex;
-    justify-content: center; /* Mantém o menu no centro */
-    align-items: center;     /* Alinha verticalmente o logo e o menu */
-    padding: 20px;
-    background-color: #0d0a1b;
-    position: relative;      /* Necessário para o posicionamento do logo */
-  }
-  
-  .cabecalho-menu {
-    display: flex;
-    gap: 15px;
-    background-color: rgba(255, 255, 255, 0.03);
-    padding: 8px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #8b88a0;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease; /* Transição suave para cores e brilho */
-    border: 1px solid transparent; /* Evita que o layout pule ao aplicar borda */
-  }
+  background-color: #0b0813; /* Fundo escuro do app */
+  font-family: sans-serif;
+}
 
-  .nav-logo {
-    position: absolute;      /* Remove o logo do fluxo central do flexbox */
-    left: 20px;              /* Alinha o logo na extremidade esquerda */
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #8b88a0;
-    text-decoration: none;
-    padding: 10px 20px;
-    transition: all 0.2s ease;
-  }
+.cabecalho {
+  display: flex;
+  justify-content: center; /* Mantém o menu no centro */
+  align-items: center;     /* Alinha verticalmente o logo e o menu */
+  padding: 20px;
+  background-color: #0d0a1b;
+  position: relative;      /* Necessário para o posicionamento do logo */
+}
 
-  .nav-item:hover {
-    background-color: rgba(59, 32, 115, 0.4); /* Roxo mais suave ao passar o mouse */
-    color: #ffffff;
-    border: 1px solid #5c35b4;
-    box-shadow: 0 0 10px rgba(92, 53, 180, 0.5); /* Brilho sutil */
-  }
+.cabecalho-menu {
+  display: flex;
+  gap: 15px;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8b88a0;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease; /* Transição suave para cores e brilho */
+  border: 1px solid transparent; /* Evita que o layout pule ao aplicar borda */
+}
+
+.nav-logo {
+  position: absolute;      /* Remove o logo do fluxo central do flexbox */
+  left: 20px;              /* Alinha o logo na extremidade esquerda */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8b88a0;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+}
+
+.nav-sobre {
+  position: absolute;      /* Remove o logo do fluxo central do flexbox */
+  right: 20px; /* Alinha o elemento na extremidade direita */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8b88a0;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: rgba(59, 32, 115, 0.4); /* Roxo mais suave ao passar o mouse */
+  color: #ffffff;
+  border: 1px solid #5c35b4;
+  box-shadow: 0 0 10px rgba(92, 53, 180, 0.5); /* Brilho sutil */
+}
 
 /* Fundo e texto geral da página */
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Cabeçalho / header */
 header, .cabecalho {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border-bottom: 1px solid var(--border-color);
-    padding: 12px 24px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 24px;
 }
 
 /* Links de navegação */
 nav a {
-    color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* CENTRALIZAÇÃO DO CONTAINER DE AVALIAÇÕES */
+#home-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 /* Cards de avaliação */
 .card-avaliacao {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  overflow-wrap: break-word; /* Força quebra de palavras longas/links */
+  word-wrap: break-word;     /* Suporte para navegadores antigos */
+  word-break: break-word;    /* Garante a quebra em blocos flex/grid */
+  
+  /* Configuração de animação original adaptada */
+  transition: var(--transition);
+}
+
+/* Efeito de mouse sobre os cards de avaliação */
+.card-avaliacao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Formulários */
 input, textarea, select {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 8px 12px;
-    width: 100%;
-    box-sizing: border-box;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Botões */
 button {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1rem;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 button:hover {
-    opacity: 0.85;
+  opacity: 0.85;
 }
 
 /* Botão de tema */
 #btn-tema {
-    background-color: transparent;
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    font-size: 0.9rem;
-    padding: 6px 12px;
-} */
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  padding: 6px 12px;
+}
 
 /* ===== ESTRELAS INTERATIVAS ===== */
 .estrelas-container {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    gap: 4px;
-    margin: 8px 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 4px;
+  margin: 8px 0;
 }
 
 .estrelas-container input[type="radio"] {
-    display: none;
+  display: none;
 }
 
 .estrelas-container label {
-    font-size: 2rem;
-    color: #ccc;
-    cursor: pointer;
-    transition: color 0.15s ease, transform 0.1s ease;
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.1s ease;
 }
 
 /* Estrela selecionada e todas as anteriores (flex-direction: row-reverse faz a mágica) */
 .estrelas-container input[type="radio"]:checked ~ label,
 .estrelas-container label:hover,
 .estrelas-container label:hover ~ label {
-    color: #f5a623;
-    transform: scale(1.15);
+  color: #f5a623;
+  transform: scale(1.15);
 }
 
+.data-postagem {
+color: #777; /* Deixa o texto cinza claro */
+font-size: 0.85rem; /* Diminui um pouco o tamanho da fonte */
+margin-top: 10px; /* Dá um espaço em relação às estrelas */
+display: block;
+}
+
+/* ===== ESTRUTURA E ANIMAÇÃO DAS CAIXAS DE LOGIN/CADASTRO ORIGINAL ===== */
+#caixaLogin, #caixaCadastro {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  
+  /* Configuração de animação idêntica ao feed */
+  transition: var(--transition);
+}
+
+/* Efeito de mouse sobre os boxes de login/cadastro */
+#caixaLogin:hover, #caixaCadastro:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#caixaLogin h1, #caixaCadastro h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#caixaLogin h2, #caixaCadastro h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+#caixaLogin input, #caixaCadastro input {
+  margin-bottom: 15px;
+}
+
+#caixaLogin button, #caixaCadastro button {
+  width: 100%;
+}
