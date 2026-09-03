@@ -87,7 +87,7 @@ body {
 /* Cabeçalho / header */
 header, .cabecalho {
   background-color: var(--card-bg);
-  color: var(--text-color);
+  color: var();
   border-bottom: 1px solid var(--border-color);
   padding: 12px 24px;
 }
@@ -111,7 +111,7 @@ nav a {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 17px;
   overflow-wrap: break-word; /* Força quebra de palavras longas/links */
   word-wrap: break-word;     /* Suporte para navegadores antigos */
   word-break: break-word;    /* Garante a quebra em blocos flex/grid */
@@ -120,18 +120,22 @@ nav a {
   transition: var(--transition);
 }
 
+
 /* Efeito de mouse sobre os cards de avaliação */
+/* Efeito sutil de luz apenas atrás do card */
 .card-avaliacao:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* Brilho roxo sutil e expandido apenas por trás */
+  box-shadow: 0 8px 24px rgba(92, 53, 180, 0.25); 
 }
+
 
 /* Formulários */
 input, textarea, select {
   background-color: var(--card-bg);
   color: var(--text-color);
   border: 1px solid var(--border-color);
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 8px 12px;
   width: 100%;
   box-sizing: border-box;
@@ -234,3 +238,70 @@ display: block;
 #caixaLogin button, #caixaCadastro button {
   width: 100%;
 }
+
+/* ===== ESTILOS DA BUSCA INTEGRADA DA DEEZER ===== */
+.busca-container {
+  position: relative; /* Mantém a lista ancorada ao container do input */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Lista suspensa de sugestões flutuando EXATAMENTE abaixo do input */
+#sugestoes-container {
+  position: absolute;
+  top: 100%; /* Coloca a lista colada na borda inferior do input */
+  left: 0;
+  width: 100%;
+  background-color: var(--card-bg, #16213e);
+  border: 1px solid var(--border-color, #2a2a4a);
+  border-top: none; /* Remove a borda de cima para parecer uma extensão do input */
+  border-radius: 0 0 10px 10px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 999; /* Garante que vai flutuar por cima do campo "Artista" */
+  box-shadow: 0 8px 24px rgba(92, 53, 180, 0.25); /* Sua luz roxa sutil */
+  box-sizing: border-box;
+}
+
+.sugestoes-oculto {
+  display: none;
+}
+
+/* Linhas de sugestões da Deezer */
+.sugestao-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s;
+}
+
+.sugestao-item:hover {
+  background-color: rgba(59, 32, 115, 0.4); /* Roxo suave do seu cabeçalho */
+}
+
+.sugestao-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.sugestao-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sugestao-titulo {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--text-color, #e6e6e6);
+}
+
+.sugestao-artista {
+  font-size: 0.8rem;
+  color: #8b88a0;
+}
+
