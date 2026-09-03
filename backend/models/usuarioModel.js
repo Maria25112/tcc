@@ -10,23 +10,24 @@ const usuarioModel = {
 
     // Login de usuário
     login: (email, senha, callback) => {
-        const sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
-        conexao.query(sql, [email, senha], callback);
+        // Busca apenas pelo e-mail para permitir validação segura de senha posteriormente
+        const sql = "SELECT id, nome_usuario, email, senha FROM usuario WHERE email = ? LIMIT 1";
+        conexao.query(sql, [email], callback);
     },
 
     // Salvar avaliação de música
     avaliar: (musica, artista, comentario, nota, callback) => {
-        // Removida a coluna data_avaliacao do INSERT, o SQL cuidará disso sozinho
         const sql = "INSERT INTO avaliacoes (musica, artista, comentario, nota) VALUES (?, ?, ?, ?)";
         conexao.query(sql, [musica, artista, comentario, nota], callback);
     },
-
 
     // Listar todas as avaliações
     listarAvaliacoes: (callback) => {
         const sql = "SELECT id, musica, artista, comentario, nota, data_avaliacao FROM avaliacoes ORDER BY data_avaliacao DESC";
         conexao.query(sql, callback);
-    }
+    },
+
+    
 
 };
 

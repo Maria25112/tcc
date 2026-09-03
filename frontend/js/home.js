@@ -1,13 +1,12 @@
 const API = "http://localhost:3000";
-
 const avaliacoesContainer = document.getElementById("home-container");
 
-// Gera as estrelas com base na nota
+// Gera as estrelas visuais com base na nota numérica
 function gerarEstrelas(nota) {
     return "⭐".repeat(nota) + "☆".repeat(5 - nota);
 }
 
-// LISTAR AVALIAÇÕES
+// Busca e renderiza todas as avaliações cadastradas
 async function carregarAvaliacoes() {
     try {
         const resposta = await fetch(`${API}/usuarios/avaliacoes`);
@@ -15,22 +14,14 @@ async function carregarAvaliacoes() {
 
         avaliacoesContainer.innerHTML = "";
 
-        if (!dados.sucesso || dados.avaliacoes.length === 0) {
+        // Validação para caso não existam registros no banco de dados
+        if (!dados.sucesso || !dados.avaliacoes || dados.avaliacoes.length === 0) {
             avaliacoesContainer.innerHTML = "<p>Nenhuma avaliação encontrada ainda.</p>";
             return;
         }
 
+        // Renderiza cada card de avaliação recebido da API
         dados.avaliacoes.forEach((avaliacao) => {
-            // CORREÇÃO: Força a conversão do texto bruto em um Objeto Date e formata no padrão brasileiro
-            const dataObjeto = new Date(avaliacao.data_avaliacao);
-            const dataExibicao = dataObjeto.toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-
             avaliacoesContainer.innerHTML += `
                 <div class="card-avaliacao">
                     <h3>${avaliacao.musica}</h3>
@@ -38,7 +29,7 @@ async function carregarAvaliacoes() {
                     <p>${avaliacao.comentario}</p>
                     <p>${gerarEstrelas(avaliacao.nota)}</p>
                     <p class="data-postagem" style="color: #777; font-size: 0.85rem; margin-top: 10px;">
-                        <small> ${dataExibicao}</small>
+                        <small>${avaliacao.data_avaliacao}</small>
                     </p>
                 </div>
             `;
@@ -50,4 +41,5 @@ async function carregarAvaliacoes() {
     }
 }
 
+// Inicializa a listagem ao carregar a página
 carregarAvaliacoes();

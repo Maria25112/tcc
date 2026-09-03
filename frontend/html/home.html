@@ -7,34 +7,34 @@
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+
+  <!-- Cabeçalho de navegação do site -->
   <header class="cabecalho">
-    <a href="home.html" class="nav-logo"> Entre Notas</a>
-    <a href="sobre.html" class="nav-sobre"> Sobre </a>
+    <a href="home.html" class="nav-logo">Entre Notas</a>
+    <a href="sobre.html" class="nav-sobre">Sobre</a>
     <nav class="cabecalho-menu">
-      <a href="home.html" class="nav-item">
-        <span class="icon">🏠</span>
-        Feed
+      <a href="home.html" class="nav-item active">
+        <span class="icon">🏠</span> Feed
       </a>
       <a href="avaliar.html" class="nav-item">
-        <span class="icon">⭐</span>
-        Avaliar
+        <span class="icon">⭐</span> Avaliar
       </a>
-      <a href="perfil.html" class="nav-item active">
-        <span class="icon">👤</span>
-        Perfil
+      <a href="perfil.html" class="nav-item">
+        <span class="icon">👤</span> Perfil
       </a>
     </nav>
   </header>
   
+  <!-- Seção principal de avaliações -->
   <section>
-    <h2 class="text-center mb-4 fw-bold">
-      Avaliações compartilhadas
-    </h2>
+    <h2 class="text-center mb-4 fw-bold">Avaliações compartilhadas</h2>
     
     <!-- Onde o JavaScript vai injetar os cards com as avaliações e as datas -->
     <div id="home-container" class="row g-3"></div>
   </section>
 
+  <!-- Script da página (linkado corretamente) -->
   <script src="../js/home.js"></script>
+
 </body>
 </html>

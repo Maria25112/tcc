@@ -34,24 +34,25 @@
     </style>
 </head>
 <body>
+
+    <!-- Cabeçalho de navegação do site -->
     <header class="cabecalho">
-        <a href="home.html" class="nav-logo"> Entre Notas</a>
-        <a href="sobre.html" class="nav-sobre"> Sobre </a>
+        <a href="home.html" class="nav-logo">Entre Notas</a>
+        <a href="sobre.html" class="nav-sobre">Sobre</a>
         <nav class="cabecalho-menu">
-          <a href="home.html" class="nav-item">
-            <span class="icon">🏠</span>
-            Feed
-          </a>
-          <a href="avaliar.html" class="nav-item">
-            <span class="icon">⭐</span>
-            Avaliar
-          </a>
-          <a href="perfil.html" class="nav-item active">
-            <span class="icon">👤</span>
-            Perfil
-          </a>
+            <a href="home.html" class="nav-item">
+                <span class="icon">🏠</span> Feed
+            </a>
+            <a href="avaliar.html" class="nav-item active">
+                <span class="icon">⭐</span> Avaliar
+            </a>
+            <a href="perfil.html" class="nav-item">
+                <span class="icon">👤</span> Perfil
+            </a>
         </nav>
-      </header>
+    </header>
+
+    <!-- Conteúdo principal do formulário -->
     <main>
         <section>
             <h2>Avaliar Música</h2>
@@ -60,36 +61,19 @@
 
         <section>
             <form id="formAvaliacao">
-
                 <div>
- 
                     <label for="musicaAvaliacao">Música</label>
-                    <input
-                        type="text"
-                        id="musicaAvaliacao"
-                        placeholder="Nome da Música"
-                        required
-                    >
+                    <input type="text" id="musicaAvaliacao" placeholder="Nome da Música" required>
                 </div>
 
                 <div>
                     <label for="artistaAvaliacao">Artista</label>
-                    <input
-                        type="text"
-                        id="artistaAvaliacao"
-                        placeholder="Nome do Artista"
-                        required
-                    >
+                    <input type="text" id="artistaAvaliacao" placeholder="Nome do Artista" required>
                 </div>
 
                 <div>
                     <label for="comentarioAvaliacao">Comentário</label>
-                    <textarea
-                        id="comentarioAvaliacao"
-                        rows="4"
-                        placeholder="Escreva seu comentário..."
-                        required
-                    ></textarea>
+                    <textarea id="comentarioAvaliacao" rows="4" placeholder="Escreva seu comentário..." required></textarea>
                 </div>
 
                 <!-- Campo nota: estrelas clicáveis -->
@@ -114,7 +98,6 @@
                 </div>
 
                 <button type="submit">Enviar Avaliação</button>
-
             </form>
 
             <!-- Parágrafo de mensagem de feedback -->

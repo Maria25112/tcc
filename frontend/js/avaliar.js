@@ -1,7 +1,7 @@
 const formAvaliacao = document.getElementById("formAvaliacao");
 const bntCor = document.getElementById("btn-tema");
 
-// Envio do formulário de avaliação
+// Envio do formulário de avaliação de música
 formAvaliacao.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -10,9 +10,9 @@ formAvaliacao.addEventListener("submit", async function (event) {
     const comentario = document.getElementById("comentarioAvaliacao").value.trim();
     const notaSelecionada = document.querySelector('input[name="nota"]:checked');
     const nota = notaSelecionada ? notaSelecionada.value : null;
-
     const mensagemAvaliacao = document.getElementById("mensagemAvaliacao");
 
+    // Validação de campos obrigatórios e seleção de nota
     if (!musica || !artista || !comentario || !nota) {
         mensagemAvaliacao.innerText = !nota
             ? "Clique em uma estrela para dar sua nota!"
@@ -22,6 +22,7 @@ formAvaliacao.addEventListener("submit", async function (event) {
     }
 
     try {
+        // Envio dos dados para a API do backend
         const resposta = await fetch("http://localhost:3000/usuarios/avaliacoes", {
             method: "POST",
             headers: {
@@ -31,9 +32,9 @@ formAvaliacao.addEventListener("submit", async function (event) {
         });
 
         const resultado = await resposta.json();
-
         mensagemAvaliacao.innerText = resultado.mensagem;
 
+        // Limpeza do formulário em caso de sucesso
         if (resultado.sucesso) {
             mensagemAvaliacao.style.color = "green";
             formAvaliacao.reset();
@@ -48,13 +49,3 @@ formAvaliacao.addEventListener("submit", async function (event) {
     }
 });
 
-// Alternância de tema claro/escuro (apenas na página de avaliações)
-bntCor.addEventListener("click", function () {
-    document.body.classList.toggle("dark-theme");
-
-    if (document.body.classList.contains("dark-theme")) {
-        bntCor.innerText = "☀️ Claro";
-    } else {
-        bntCor.innerText = "🌙 Escuro";
-    }
-});
